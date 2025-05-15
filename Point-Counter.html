@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Images/logggo.ico">
+  <style>
+    body{
+      zoom:160%;
+    }
+    .js-small{
+      display: grid;
+      grid-template-columns: 100px 100px 100px 100px 55px;
+      align-items: center;
+    }
+    .js-top{
+      display: grid;
+      grid-template-columns: 100px 100px 100px;
+      align-items: center;
+    }
+    .js-center{
+      text-align: center;
+    }
+    .js-name{
+      font-weight: bold;
+
+    }
+    .js-button-css{
+      border: none;
+      color: white;
+      padding: 3px 0.1px;
+      border-radius: 0px;
+      background-color: green;
+      margin-left: 3px;
+    }
+    .js-delete-css{
+      border: none;
+      color: white;
+      padding: 4px 6px;
+      border-radius: 0px;
+      background-color: darkred;
+      margin-left: 3px;
+    }
+    .css-title{
+      font-weight: bold;
+    }
+
+  </style>
+
+  <title class="css-title">Point Counter</title>
+</head>
+<body>
+  <div class="js-top">
+  <p class="js-name">Person Name:</p>
+  <input class="js-input-name" placeholder="Name"><button class="js-button-name js-button-css">Add</button>
+</div>
+  <div></div>
+  <br>
+  <div class="big-container js-big"></div>
+
+
+
+
+
+  <script>
+    //Creating  some variables
+    let name = []
+    let noMatch = []
+    
+    
+
+
+
+    //Function that resets the text in the input.
+    function inputReset(input){
+      input.value = ''
+    }
+
+
+
+    //Function that updates HTML
+    updateHTML()
+    function updateHTML(){
+
+      let bigContainer = ''
+          name.forEach((array)=>{
+
+        bigContainer+=`
+        <div class="small-container js-small">
+        <p class="js-name">${array.name}</p>
+        <input class="js-input-points" data-input-id="${array.name}" placeholder="# of points">
+        <button class="js-b js-button-css" data-input-id="${array.name}">Add</button>
+        <p class="js-${array.name} js-center"> Points: ${array.points}</p>
+        <button class="js-delete-button js-delete-css" data-id="${array.name}">Delete</button>
+        </div>
+        `
+        
+
+          })
+      document.querySelector('.big-container').innerHTML = bigContainer
+      eventListenerForButtons()
+      eventListenerForInputs()
+      deleteName()
+    }
+
+
+
+
+    //forEach for Every Input
+  function eventListenerForInputs(){
+
+    document.querySelectorAll('.js-input-points').forEach((input)=>{
+      
+      input.addEventListener('keydown',()=>{
+        let insideInput = input.value
+        let k = event.key
+        
+        if (k == 1 || k == 2 || k == 3 || k==4||k==5||k==6||k==7||k==8||k==9||k==0){
+        insideInput+= `${k}`
+      } else if (event.key == 'Enter'){
+        name.forEach((nam)=>{
+          if (nam.name == input.dataset.inputId){
+            nam.points += eval(input.value)
+            updateHTML()
+          }
+      updateHTML()
+        })
+          
+          
+          
+      } else if (k == 'Backspace'){
+        setTimeout(()=>{insideInput = input.value})
+      } else{
+        setTimeout(()=>{input.value = insideInput}, 0.0001)
+    }
+    
+  })
+
+        
+      })
+
+
+      }
+  eventListenerForInputs()
+
+
+  //Event Listener for every Button
+  function eventListenerForButtons(){
+    document.querySelectorAll('.js-b').forEach((button)=>{
+        button.addEventListener('click', ()=>{
+          let inputValue;
+          document.querySelectorAll('.js-input-points').forEach((input)=>{
+            if (input.dataset.inputId == button.dataset.inputId){
+              inputValue = input.value
+            }
+          })
+
+          name.forEach((nam)=>{
+          if (nam.name == button.dataset.inputId){
+            nam.points += eval(inputValue)
+            updateHTML()
+          }
+      
+        })
+        })
+      })
+  }
+
+    // Event Listener for name Input
+    document.querySelector('.js-input-name').addEventListener('keydown',(input)=>{
+
+
+      if (event.key == 'Enter'){
+
+        if (document.querySelector('.js-input-name').value !== ''){
+
+        name.push({
+        name: document.querySelector('.js-input-name').value,
+        points: 0
+        })
+      
+        inputReset(document.querySelector('.js-input-name'))
+      }}
+
+        updateHTML()
+        
+
+    })
+
+    //Event Lister for name Button
+    document.querySelector('.js-button-name').addEventListener('click', ()=>{
+      if (document.querySelector('.js-input-name').value !== ''){
+      name.push({
+        name: document.querySelector('.js-input-name').value,
+        points: 0
+      })}
+        updateHTML()
+        inputReset(document.querySelector('.js-input-name'))
+
+    })
+
+
+
+    //Function that deletes names
+    function deleteName(){
+      document.querySelectorAll('.js-delete-button').forEach((button)=>{
+        button.addEventListener('click', ()=>{
+          if(confirm("Are you sure you want to delete the person? \n His points can not be recovered.")){
+
+          
+          let id = button.dataset.id
+
+
+      name.forEach((person, index)=>{
+        if(id == person.name){
+          name.splice(index, 1)
+        }
+        
+      })
+    alert('Deleted')
+    }
+      updateHTML()
+    })
+  })
+    }
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+    
+
+    
+  </script>
+  
+</body>
+</html>

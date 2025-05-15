@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Calculator</title>
+</head>
+<body>
+  <p>Kitchen Calculator</p>
+  <div class="js-result-container"></div>
+
+  
+
+  <script>
+    let calculatio = JSON.parse(localStorage.getItem('calculatee'))
+    let countertop = 0
+    calculatio.wallIn.forEach((array)=>{
+      countertop+=array.wallIn
+    })
+    countertop = countertop - calculatio.fridgeIn - calculatio.pantryIn
+    if (calculatio.cookOption = 'Range'){
+      countertop -= calculatio.cookIn
+    }
+    countertop = (countertop*28)/144
+
+    let island = 0
+    calculatio.islandIn.forEach((the)=>{
+      island += ((eval(the.islandWidthIn+4))*(eval(the.islandLengthIn+4)))/144
+    })
+
+    let waterfall = 0
+
+    calculatio.islandIn.forEach((the)=>{
+      if (the.waterfall == 'Yes'){
+      waterfall += (the.islandWidthIn + 2 + the.waterfallDimension.sittingAreaIn)*the.waterfallDimension.waterfallAmount*36/144
+      }
+
+    
+    })
+    let backsplash = 0
+    calculatio.wallIn.forEach((the)=>{
+      backsplash += the.wallIn
+    })
+    backsplash = ((backsplash - calculatio.fridgeIn - calculatio.pantryIn)*20)/144
+    let hoodIn = 0;
+
+    if (calculatio.hoodOption == 'Chimney'){
+      hoodIn = (36*(calculatio.ceilingIn-54))/144
+    } else if (calculatio.hoodOption == 'Under Cabinet Hood'){
+      hoodIn = (30*10)/144
+    } else if (calculatio.hoodOption == 'Hood Box'){
+      hoodIn = (42*10)/144
+    } else if (calculatio.hoodOption == 'Microwave Hood'){
+      hoodIn = 0;
+    }
+    let longDistance;
+    let downtownOption = 0
+    let condoOption = 0
+    if (calculatio.longDistanceOption == 'Yes'){
+      longDistance = calculatio.hourDriveOption*200
+    }
+    if (calculatio.downtown == 'Yes'){
+      downtownOption = 200
+    }
+    if (calculatio.condo == 'Yes'){
+      condoOption = 200
+    }
+
+
+
+  
+    
+    document.querySelector('.js-result-container').innerHTML = `
+    <p>Client Name: ${calculatio.clientName}</p>
+    <p>City: ${calculatio.clientCity}</p>
+    <p>More Info: ${calculatio.clientMoreInfo > 0? calculatio.clientMoreInfo : "N/A"}</p>
+    <br>
+    <p>1.Countertop:</p>
+    <p>*Countertop*: ${countertop > 0? `${Math.ceil(countertop)} Square Feet` : "N/A"} </p>
+    <p>*Island*: ${island > 0? `${Math.ceil(island)} Square Feet` : "N/A"} </p>
+    <p>*Waterfall*: ${waterfall > 0? `${Math.ceil(waterfall)} Square Feet` : "N/A"} </p>
+    <p>*Countertop Total: ${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)} Square Feet</p>
+      <br>
+    <p>2. Backsplash</p>
+    <br>
+    <p>*Backsplash*: ${backsplash > 0? `${Math.ceil(backsplash)}` : "N/A"} Square Feet</p>
+    <p>*Hood Area*:</p>
+    <p>&nbsp&nbsp&nbsp Hood Option: ${calculatio.hoodOption} </p>
+    <p>&nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : "N/A"} </p>
+    <p>*Backsplash Total: ${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
+    <br>
+    <p>Extra Charges</p>
+    <p>*Long distance*: ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "N/A"}</p>
+    <p>*Downtown*: ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "N/A"}</p>
+    <p>*Condo*: ${condoOption >= 0? `$${Math.ceil(condoOption)} `: "N/A"}</p>
+    <p>*Extra Charges Total:$${longDistance + downtownOption + condoOption}</p>
+
+
+    `
+  </script>
+  <script src="JavaScript/Kitchen-Calculator.js"></script>
+</body>
+</html>
