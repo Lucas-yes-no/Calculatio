@@ -7,7 +7,7 @@
   <title>Kitchen Calculator</title>
 </head>
 <body>
-  <p>Kitchen Calculator</p>
+  <h1>Kitchen Calculator</h1>
   <div class="js-result-container"></div>
 
   
@@ -15,19 +15,27 @@
   <script>
     let calculatio = JSON.parse(localStorage.getItem('calculatee'))
     let countertop = 0
+    
     calculatio.wallIn.forEach((array)=>{
       countertop+=array.wallIn
     })
+  
     countertop = countertop - calculatio.fridgeIn - calculatio.pantryIn
     if (calculatio.cookOption = 'Range'){
       countertop -= calculatio.cookIn
     }
     countertop = (countertop*28)/144
+    if (Number.isNaN(countertop)){
+      countertop = 0
+    }
 
     let island = 0
     calculatio.islandIn.forEach((the)=>{
       island += ((eval(the.islandWidthIn+4))*(eval(the.islandLengthIn+4)))/144
     })
+    if (Number.isNaN(island)){
+      island = 0
+    }
 
     let waterfall = 0
 
@@ -38,11 +46,20 @@
 
     
     })
+    if (Number.isNaN(waterfall)){
+      waterfall = 0
+    }
+
     let backsplash = 0
     calculatio.wallIn.forEach((the)=>{
       backsplash += the.wallIn
     })
+
     backsplash = ((backsplash - calculatio.fridgeIn - calculatio.pantryIn)*20)/144
+    if (Number.isNaN(backsplash)){
+      backsplash = 0
+    }
+
     let hoodIn = 0;
 
     if (calculatio.hoodOption == 'Chimney'){
@@ -66,35 +83,41 @@
     if (calculatio.condo == 'Yes'){
       condoOption = 200
     }
-
+    
 
 
   
     
     document.querySelector('.js-result-container').innerHTML = `
-    <p>Client Name: ${calculatio.clientName}</p>
-    <p>City: ${calculatio.clientCity}</p>
-    <p>More Info: ${calculatio.clientMoreInfo > 0? calculatio.clientMoreInfo : "N/A"}</p>
-    <br>
-    <p>1.Countertop:</p>
-    <p>*Countertop*: ${countertop > 0? `${Math.ceil(countertop)} Square Feet` : "N/A"} </p>
-    <p>*Island*: ${island > 0? `${Math.ceil(island)} Square Feet` : "N/A"} </p>
-    <p>*Waterfall*: ${waterfall > 0? `${Math.ceil(waterfall)} Square Feet` : "N/A"} </p>
-    <p>*Countertop Total: ${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)} Square Feet</p>
-      <br>
-    <p>2. Backsplash</p>
-    <br>
-    <p>*Backsplash*: ${backsplash > 0? `${Math.ceil(backsplash)}` : "N/A"} Square Feet</p>
-    <p>*Hood Area*:</p>
+    <p><b>Client Name:</b> ${calculatio.clientName}</p>
+    <p><b>City:</b> ${calculatio.clientCity}</p>
+    <p><b>More Info:</b> ${calculatio.clientMoreInfo == ''? "N/A" : `${calculatio.clientMoreInfo}`}</p>
+    
+    <h2>1.Countertop:</h2>
+    <p><b>Countertop:</b> ${countertop > 0? `${Math.ceil(countertop)} Square Feet`: 0}</p>
+    <p><b>Island:</b> ${island > 0? `${Math.ceil(island)} Square Feet` : 0} </p>
+    <p><b>Waterfall:</b> ${waterfall > 0? `${Math.ceil(waterfall)} Square Feet` : 0} </p>
+    <p><b>Countertop Total:</b> ${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)} Square Feet</p>
+      
+    <h2>2. Backsplash</h2>
+    
+    <p><b>Backsplash:</b> ${backsplash > 0? `${Math.ceil(backsplash)}` : 0} Square Feet</p>
+    <p><b>Hood Area:</b></p>
     <p>&nbsp&nbsp&nbsp Hood Option: ${calculatio.hoodOption} </p>
-    <p>&nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : "N/A"} </p>
-    <p>*Backsplash Total: ${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
-    <br>
-    <p>Extra Charges</p>
-    <p>*Long distance*: ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "N/A"}</p>
-    <p>*Downtown*: ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "N/A"}</p>
-    <p>*Condo*: ${condoOption >= 0? `$${Math.ceil(condoOption)} `: "N/A"}</p>
-    <p>*Extra Charges Total:$${longDistance + downtownOption + condoOption}</p>
+    <p>&nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : 0} </p>
+    <p><b>Backsplash Total:</b> ${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
+
+    <h2>3. Cabinets</h2>
+    <p><b></b>:</p>
+    <p><b></b>:</p>
+
+    <p><b></b>: Cabinets  </p>
+    <h2>Extra Charges</h2>
+    <p><b>Long distance:</b> ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "$0"}</p>
+    <p><b>Downtown:</b> ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "$0"}</p>
+    <p><b>Condo:</b> ${condoOption >= 0? `$${Math.ceil(condoOption)} `: "$0"}</p>
+    <p><b>Extra Charges Total:</b>$${(longDistance + downtownOption + condoOption) >= 0? `${longDistance + downtownOption + condoOption}`: 0}</p>
+
 
 
     `

@@ -54,12 +54,20 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
   }
   calculate.wallAmount = document.querySelector('.js-wall-amount').value
   calculate.wallIn=[]
+  if (calculate.wallAmount > 0){
   document.querySelectorAll('.js-wall-in').forEach((input, index)=>{
+
     calculate.wallIn.push({
     wallNumber: index+1,
     wallIn: eval(input.value),
     })
   })
+} else{
+  calculate.wallIn.push({
+    wallNumber: 0,
+    wallIn: 0,
+  })
+}
   calculate.cornerAmount = eval(document.querySelector('.js-corner-amount').value)
   calculate.islandAmount = eval(document.querySelector('.js-island-amount').value)
   calculate.islandIn = []
@@ -147,6 +155,26 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
  },1 )
 
   })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Event Listener for Windows
 
   document.querySelector('.js-window-2-maybe').addEventListener('click', ()=>{
