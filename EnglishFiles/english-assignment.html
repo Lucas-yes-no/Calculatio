@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body{
+      background-image: url("/Images/books.png");
+      background-size: cover;
+    }
+    .popup{
+  border: solid;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  width: 400px;
+  height: 400px;
+  margin-left: -200px; /*Half the value of width to center div*/
+  margin-top: -200px; /*Half the value of height to center div*/
+  z-index: 200;
+  opacity: 1;
+
+    }
+    .popup-hide{
+      display: none;
+    }
+    .close{
+      float: right;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      padding-top: 3px;
+    }
+    .close:hover{
+      background-color: rgba(100,100,100,0.8);
+    }
+    .popup-buttons{ 
+      margin-top: 10px;
+      border: none;
+      background-color: lightgreen;
+
+      Width: 300px;
+      cursor: pointer;
+      height: 40px;
+      border-radius: 50px;;
+      text-align: center;
+    }
+    .popup-buttons:hover{
+      background-color: rgb(120,200,120);
+    }
+    .info-buttons{
+      margin-top: 20px;
+      text-align: center;
+    }
+    .popup-title{
+      margin-left: 15px;
+    }
+    .title{
+      text-align: center;
+      font-size: 70px;
+      color: white;
+
+
+    }
+    .titlee{
+      text-align: center;
+      font-size: 30px;
+      color: white;
+      position: relative;
+      bottom: 30px;
+    }
+    .page-buttons{
+      font-family: 'Times New Roman', Times, serif;
+      width: 60%;
+      margin-top: 15px;
+      height: 80px;
+      border: none;
+      border-color: white;
+      cursor: pointer;
+      background-color: rgba(0,123,255,0.85);
+      color: white;
+      border-radius: 100px;
+      font-size: 40px;
+      font-weight: 600;
+      padding: 12px 24px;
+    }
+    .page-buttons:hover{
+      background-color: #026ca1;
+    }
+    .js-page-container{
+      text-align: center;
+      position: relative;
+      bottom: 30px;
+
+    }
+    .opaque{
+      background-color: rgba(50,50,50,0.8);
+      padding: 3px 30px;
+      text-align: center;
+      border-radius: 20px;
+    }
+    
+
+  </style>
+
+  <link rel="stylesheet" href="navbar.css">
+  <title>English Assignment</title>
+</head>
+<body>
+  <br>
+  <br>
+
+  <h1 class="title"><span class="opaque">Culminating</span></h1>
+
+  <p class="titlee"><span class="opaque">By: Ethan Cao</span></p>
+
+  <div class="js-page-container"></div>
+  <div class="popup popup-hide">
+    <button class="close js-close">X</button>
+    
+    <div class="info-buttons"></div>
+  </div>
+
+  <script>
+    document.querySelector('.js-close').addEventListener('click', ()=>{
+      document.querySelector('.popup').classList.add('popup-hide')
+    })
+  </script>
+
+  <div class="navbar">
+
+  </div>
+
+
+
+  <script type="module" src="navbar.js"></script>
+  <script type="module" src="english-assignment.js"></script>
+  
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    body{
+      background-image: url("/Images/background.jpg");
+      background-size: cover;
+    }
+    .paper{
+      width: 376px;
+      z-index: -1;
+      margin-top: 50px;
+    }
+    div{
+      text-align: center;
+    }
+    .text{
+      position: absolute;
+      text-align: left;
+      left: 510px;
+      top: 125px;
+      width: 315px;
+      font-size: 86.7%;
+      font-family:'Times New Roman', Times, serif;
+    }
+    .title{
+      position: absolute;
+      font-weight: bold;
+      width: 300px;
+      text-align: center;
+      left: 500px;
+      top: 72px;
+    }
+    .back-button{
+      position:absolute;
+      top: 546px;
+      border: none;
+      background-color: blue  ;
+      left: 780px;
+      color: white;
+      cursor: pointer;
+      height: 27px;
+      width: 30px;
+    }
+    .back-button:hover{
+      background-color: rgb(100,100,255);
+    }
+    .image{
+      position: absolute;
+      width: 200px;
+      top: 250px;
+      left: 550px;
+    }
+  </style>
+  <title></title>
+  <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+  
+  <div>
+  <img class="paper" src="/Images/paper.jpg">
+  <p class="title">Book Talk: 1984(George Orwell) 2</p>
+  <p class="text">
+    &nbsp;&nbsp;&nbsp;&nbsp;The reason I like this book, like I said, is because of the theme. Orwell is trying to warn us of a future that could happen, if tyrannical people take over governments, and if we don't try to stop things like these from happening, we could end up in the dystopia he warned us of.
+  </p>
+   <img class="image" src="/Images/1984.png">
+    <a href="book-talk.html">
+     
+    <button class="back-button"><</button>
+  </a>
+  </div>
+      <div class="navbar"></div>
+  <script type="module" src="inHTML.js"></script>
+  <script type="module" src="navbar.js"></script>
+</body>
+</html>
