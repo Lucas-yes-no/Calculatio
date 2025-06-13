@@ -32,6 +32,6 @@
   name: 'Reflection',
   innerStuff: [{
     name: 'Course Reflection',
-    link: ''
+    link: 'course-reflection.html'
   }]
 }]
