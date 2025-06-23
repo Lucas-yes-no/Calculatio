@@ -137,13 +137,14 @@
   let totalCabinetAmount = pantryAmount + upperCabinetsAmount + lowerCabinetsAmount
   
 
-  let crownMoldingHtml;
+  let crownMoldingHtml = ''
   let crownMoldingPrice = 0
   if (calculatio.moldingOption == 'Yes'){
     crownMoldingPrice = 0
   }
 
-    
+    let standardPrice = -1
+
     document.querySelector('.js-result-container').innerHTML = `
     <p><b>Client Name:</b> ${calculatio.clientName}</p>
     <p><b>City:</b> ${calculatio.clientCity}</p>
@@ -178,9 +179,20 @@
     </p>
     <p><b>Total Cabinets:</b> ${totalCabinetAmount}</p>
 
-  ${crownMoldingHtml}
+   ${crownMoldingHtml}
 
+    
+    <p>
+      <b><select>
+        <option disabled selected>Select Your Standard</option>
+        <option value="">Flat Door Standard</option>
+        <option value="">Shaker Standard</option>
+        <option value="">Best Quality</option>
+        </select></b>
+       Amount of Cabinets x <input class="js-standard" placeholder="0" style="width: 60px;">
+        = $<span class="js-price"></span> <br>
 
+    </p>
     <h2>Extra Charges</h2>
     <p><b>Long distance:</b> ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "$0"}</p>
     <p><b>Downtown:</b> ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "$0"}</p>
@@ -190,6 +202,14 @@
 
 
     `
+
+ 
+ document.querySelector('.js-standard').addEventListener('keydown', ()=>{
+  let input = document.querySelector('.js-standard')
+  setTimeout(()=>{
+    document.querySelector('.js-price').innerHTML = totalCabinetAmount*input.value
+  },1)
+  })
   </script>
   <script src="JavaScript/Kitchen-Calculator.js"></script>
 </body>
