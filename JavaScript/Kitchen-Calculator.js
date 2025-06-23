@@ -152,7 +152,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
   if (document.querySelector('.js-crown-molding-maybe').checked){
     calculate.moldingOption = 'Yes'
   } else{
-    calculatio.moldingOption = 'No'
+    calculate.moldingOption = 'No'
   }
   if (document.querySelector('.js-under-counter-wine-fridge-maybe').checked){
     calculate.underCounterWineFridgeOption = 'Yes'
