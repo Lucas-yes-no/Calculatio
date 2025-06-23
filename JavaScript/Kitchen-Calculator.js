@@ -46,7 +46,11 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
   } else {
     calculate.contractorOption = 'No'
   }
+  if (document.querySelector('.js-ceiling-in').value){
   calculate.ceilingIn = eval(document.querySelector('.js-ceiling-in').value)
+  } else{
+  calculate.ceilingIn = 0
+  }
   if (document.querySelector('.js-ceiling-double-layer-maybe').checked){
     calculate.ceilingDoubleLayerOption = 'Yes'
   } else{
@@ -113,25 +117,49 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
   calculate.cookOption = document.querySelector('.js-cook-option').value
   calculate.cookIn = eval(document.querySelector('.js-cook-in').value)
   calculate.hoodOption = document.querySelector('.js-hood-option').value
+  if (document.querySelector('.js-fridge-in').value){
   calculate.fridgeIn = eval(document.querySelector('.js-fridge-in').value)
-  calculate.pantryIn = eval(document.querySelector('.js-pantry-in').value)
+  } else {
+    calculate.fridgeIn = 0
+  }
+  if (document.querySelector('.js-pantry-width-in').value){
+  calculate.pantryWidthIn = eval(document.querySelector('.js-pantry-width-in').value)
+  } else{
+    calculate.pantryWidthIn = 0
+  }
+  if (document.querySelector('.js-pantry-height-in')){
+    calculate.pantryHeightIn = eval(document.querySelector('.js-pantry-height-in').value)
+  }else{
+    calculate.pantryHeightIn
+  }
+  if (document.querySelector('.js-window-1-width-in').value){
   calculate.window1WidthIn = eval(document.querySelector('.js-window-1-width-in').value)
+  } else{
+    calculate.window1WidthIn = 0
+  }
   if (document.querySelector('.js-window-2-maybe').checked){
     calculate.window2Option = 'Yes'
-    window2WidthIn = eval(document.querySelector('.js-window-2-width-in').value)
+    calculate.window2WidthIn = eval(document.querySelector('.js-window-2-width-in').value)
   } else {
     calculate.window2Option = 'No'
+    calculate.window2WidthIn = 0
   }
   if (document.querySelector('.js-dishwasher-maybe').checked){
     calculate.dishwasherOption = 'Yes'
   } else {
     calculate.dishwasherOption = 'No'
   }
+  if (document.querySelector('.js-crown-molding-maybe').checked){
+    calculate.moldingOption = 'Yes'
+  } else{
+    calculatio.moldingOption = 'No'
+  }
   if (document.querySelector('.js-under-counter-wine-fridge-maybe').checked){
     calculate.underCounterWineFridgeOption = 'Yes'
     calculate.underCounterWineFridgeIn = eval(document.querySelector('.js-wine-fridge-width-in').value)
   } else {
     calculate.underCounterWineFridgeOption = 'No'
+    calculate.underCounterWineFridgeIn = 0
   }
   if (document.querySelector('.js-long-distance-maybe').checked){
     calculate.longDistanceOption = 'Yes'
@@ -155,6 +183,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
  },1 )
 
   })
+
 
 
 

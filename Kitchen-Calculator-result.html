@@ -14,6 +14,7 @@
 
   <script>
     let calculatio = JSON.parse(localStorage.getItem('calculatee'))
+    console.log(calculatio.cookOption)
     let countertop = 0
     
     calculatio.wallIn.forEach((array)=>{
@@ -21,9 +22,10 @@
     })
   
     countertop = countertop - calculatio.fridgeIn - calculatio.pantryIn
-    if (calculatio.cookOption = 'Range'){
+    if (calculatio.cookOption === 'Range'){
       countertop -= calculatio.cookIn
     }
+
     countertop = (countertop*28)/144
     if (Number.isNaN(countertop)){
       countertop = 0
@@ -85,8 +87,62 @@
     }
     
 
+    let upperCabinets = 0
+    let lowerCabinets = 0
+    calculatio.wallIn.forEach((thing)=>{
+      upperCabinets += thing.wallIn
+      lowerCabinets += thing.wallIn
+    })
+    console.log(lowerCabinets)
+    upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn
+    lowerCabinets = lowerCabinets - calculatio.fridgeIn - calculatio.pantryWidthIn
+    console.log(lowerCabinets)
+    if (calculatio.hoodOption === "Chimney"){
+      upperCabinets -= 36
+    }
+    if (calculatio.cookOption === "Range"){
+      lowerCabinets -= cookIn
+    }
+    if (calculatio.dishwasherOption === 'Yes'){
+      lowerCabinets -=24
+    }
+    if (calculatio.underCounterWineFridgeOption === 'Yes'){
+      lowerCabinets -= calculatio.underCounterWineFridgeIn
+    }
+    
+    upperCabinets = upperCabinets - (calculatio.cornerAmount*12)
+    lowerCabinets = lowerCabinets - (calculatio.cornerAmount*12)
 
+    upperCabinets = upperCabinets/12
+    let upperCabinetsAmount;
+    let lowerCabinetsAmount = lowerCabinets/27
+    if (calculatio.ceilingDoubleLayerOption == 'No'){
+    if (calculatio.ceilingIn <= 6){
+      upperCabinetsAmount = upperCabinets/27
+    } else if (calculatio.ceilingIn > 6){
+      upperCabinetsAmount = (upperCabinets/27)-2
+    }
+  } else{
+    upperCabinetsAmount = (upperCabinets/27)+(upperCabinets/27/2)
+  }
   
+  let pantryAmount = 0
+  if (calculatio.pantryHeightIn == 90){
+    pantryAmount = calculatio.pantryWidthIn/24*2
+  } else if (calculatio.pantryHeightIn == 96){
+    pantryAmount = calculatio.pantryWidthIn/21*2
+  } else if (calculatio.pantryHeightIn == 84){
+    pantryAmount = calculatio.pantryWidthIn/27*2
+  }
+  let totalCabinetAmount = pantryAmount + upperCabinetsAmount + lowerCabinetsAmount
+  
+
+  let crownMoldingHtml;
+  let crownMoldingPrice = 0
+  if (calculatio.moldingOption == 'Yes'){
+    crownMoldingPrice = 0
+  }
+
     
     document.querySelector('.js-result-container').innerHTML = `
     <p><b>Client Name:</b> ${calculatio.clientName}</p>
@@ -103,15 +159,28 @@
     
     <p><b>Backsplash:</b> ${backsplash > 0? `${Math.ceil(backsplash)}` : 0} Square Feet</p>
     <p><b>Hood Area:</b></p>
-    <p>&nbsp&nbsp&nbsp Hood Option: ${calculatio.hoodOption} </p>
-    <p>&nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : 0} </p>
+    <p>&nbsp&nbsp&nbsp Hood Option: ${calculatio.hoodOption} <br>
+    &nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : 0} </p>
     <p><b>Backsplash Total:</b> ${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
 
     <h2>3. Cabinets</h2>
-    <p><b></b>:</p>
-    <p><b></b>:</p>
+    <p><b>Upper Cabinets:</b><br><br>
+    &nbsp&nbsp&nbsp${upperCabinets} Square Feet <br>
+    &nbsp&nbsp&nbsp${upperCabinetsAmount} Cabinets
+      </p>
+    <p><b>Lower Cabinets:</b> <br><br>
+    &nbsp&nbsp&nbsp${lowerCabinets} Square Feet <br>
+    &nbsp&nbsp&nbsp${lowerCabinetsAmount} Cabinets
+    </p>
+    
+    <p><b>Pantry:</b> 
+    &nbsp&nbsp&nbsp${pantryAmount} Cabinets
+    </p>
+    <p><b>Total Cabinets:</b> ${totalCabinetAmount}</p>
 
-    <p><b></b>: Cabinets  </p>
+  ${crownMoldingHtml}
+
+
     <h2>Extra Charges</h2>
     <p><b>Long distance:</b> ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "$0"}</p>
     <p><b>Downtown:</b> ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "$0"}</p>
