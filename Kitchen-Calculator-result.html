@@ -5,6 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchen Calculator</title>
+  <style>
+    .no-margin{
+    margin: 0;
+    margin-top: 7px;
+    
+    }
+    .no-marginn{
+      margin: 0;
+      margin-top: 2px;
+    }
+  </style>
 </head>
 <body>
   <h1>Kitchen Calculator</h1>
@@ -95,10 +106,11 @@
       upperCabinets += thing.wallIn
       lowerCabinets += thing.wallIn
     })
+    console.log(lowerCabinets)
 
     upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn
     lowerCabinets = lowerCabinets - calculatio.fridgeIn - calculatio.pantryWidthIn
-
+    console.log(lowerCabinets)
     if (calculatio.hoodOption === "Chimney"){
       upperCabinets -= 36
     }
@@ -111,23 +123,33 @@
     if (calculatio.underCounterWineFridgeOption === 'Yes'){
       lowerCabinets -= calculatio.underCounterWineFridgeIn
     }
-    
+    console.log(lowerCabinets)
     upperCabinets = upperCabinets - (calculatio.cornerAmount*12)
-    lowerCabinets = lowerCabinets - (calculatio.cornerAmount*12)
-
+    lowerCabinets = lowerCabinets - (calculatio.cornerAmount*24)
+    console.log(lowerCabinets)
     upperCabinets = upperCabinets/12
+
+    lowerCabinets = lowerCabinets/12
+
+
+
+
     let upperCabinetsAmount;
-    let lowerCabinetsAmount = lowerCabinets/27
+    let lowerCabinetsAmount = lowerCabinets*12/27
     if (calculatio.ceilingDoubleLayerOption == 'No'){
-    if (calculatio.ceilingIn <= 6){
-      upperCabinetsAmount = upperCabinets/27
-    } else if (calculatio.ceilingIn > 6){
-      upperCabinetsAmount = (upperCabinets/27)-2
+    if (calculatio.ceilingIn <= 96){
+      upperCabinetsAmount = (upperCabinets*12)/27
+    } else if (calculatio.ceilingIn > 96){
+      if (calculatio.upperCabinetsHeightIn == 36 || calculatio.upperCabinetsHeightIn == 30){
+      upperCabinetsAmount = (upperCabinets*12)/27
+    } else if (calculatio.upperCabinetsHeightIn == 42){
+      upperCabinetsAmount = ((upperCabinets*12)/27)+2
+    }
     }
   } else{
     upperCabinetsAmount = (upperCabinets/27)+(upperCabinets/27/2)
   }
-  
+
   let pantryAmount = 0
   if (calculatio.pantryHeightIn == 90){
     pantryAmount = calculatio.pantryWidthIn/12/24*2
@@ -136,7 +158,7 @@
   } else if (calculatio.pantryHeightIn == 84){
     pantryAmount = calculatio.pantryWidthIn/12/27*2
   }
-  let totalCabinetAmount = pantryAmount + upperCabinetsAmount + lowerCabinetsAmount
+  let totalCabinetAmount = pantryAmount + Math.ceil(upperCabinetsAmount*2)/2 + Math.ceil(lowerCabinetsAmount*2)/2
   
 
   let crownMoldingHTML = ''
@@ -156,18 +178,39 @@
       </p>
     `
   }
+    let moreInfoHTML = ''
+    if (calculatio.clientMoreInfo !== ''){
+      moreInfoHTML = `<p><b>More Info:</b> ${calculatio.clientMoreInfo}</p>`
+    }
+    
 
-    let standardPrice = -1
+    let islandHTMLL = ''
+    let waterfallHTML = ''
+    
+    if (calculatio.islandAmount !== 0){
+      islandHTMLL = `<p><b>Island:</b> ${island > 0? `${Math.ceil(island)} Square Feet` : 0} </p>`
+      let ifWaterfall = false;
+
+      calculatio.islandIn.forEach((the)=>{
+        if (the.waterfall == 'Yes'){
+          ifWaterfall = true
+        }
+      })
+      if (ifWaterfall){
+        waterfallHTML = `<p><b>Waterfall:</b> ${waterfall > 0? `${Math.ceil(waterfall)} Square Feet` : 0} </p>`
+      }
+    } 
+    
 
     document.querySelector('.js-result-container').innerHTML = `
     <p><b>Client Name:</b> ${calculatio.clientName}</p>
     <p><b>City:</b> ${calculatio.clientCity}</p>
-    <p><b>More Info:</b> ${calculatio.clientMoreInfo == ''? "N/A" : `${calculatio.clientMoreInfo}`}</p>
+    ${moreInfoHTML}
     
     <h2>1.Countertop:</h2>
     <p><b>Countertop:</b> ${countertop > 0? `${Math.ceil(countertop)} Square Feet`: 0}</p>
-    <p><b>Island:</b> ${island > 0? `${Math.ceil(island)} Square Feet` : 0} </p>
-    <p><b>Waterfall:</b> ${waterfall > 0? `${Math.ceil(waterfall)} Square Feet` : 0} </p>
+    ${islandHTMLL}
+    ${waterfallHTML}
     <p><b>Countertop Total:</b> ${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)} Square Feet</p>
       
     <h2>2. Backsplash</h2>
@@ -180,12 +223,12 @@
 
     <h2>3. Cabinets</h2>
     <p><b>Upper Cabinets:</b><br><br>
-    &nbsp&nbsp&nbsp${upperCabinets} Square Feet <br>
-    &nbsp&nbsp&nbsp${upperCabinetsAmount} Cabinets
+    &nbsp&nbsp&nbsp${Math.ceil(upperCabinets*2)/2} Feet <br>
+    &nbsp&nbsp&nbsp${Math.ceil(upperCabinetsAmount*2)/2} Cabinets
       </p>
     <p><b>Lower Cabinets:</b> <br><br>
-    &nbsp&nbsp&nbsp${lowerCabinets} Square Feet <br>
-    &nbsp&nbsp&nbsp${lowerCabinetsAmount} Cabinets
+    &nbsp&nbsp&nbsp${Math.ceil(lowerCabinets*2)/2} Feet <br>
+    &nbsp&nbsp&nbsp${Math.ceil(lowerCabinetsAmount*2)/2} Cabinets
     </p>
     
     <p><b>Pantry:</b> 
@@ -196,19 +239,26 @@
    
 
     
-    <p>
-      <b><select>
-        <option disabled selected>Select Your Standard</option>
-        <option value="">Flat Door Standard</option>
-        <option value="">Shaker Standard</option>
-        <option value="">Best Quality</option>
-        </select></b>
-       Amount of Cabinets x <input class="js-standard" placeholder="0" style="width: 60px;">
-        = $<span class="js-price">0</span> <br>
+    
+      <p class="no-margin"><b>Flat Door Standard:</b>
+       &nbsp&nbspAmount of Cabinets x <input class="js-flat" placeholder="0" style="width: 60px;">
+        = $<span class="js-flat-price">0</span> </p>
 
+       <p class="no-margin">  <b>Shaker Standard:</b>
+       &nbsp&nbsp&nbsp&nbsp&nbsp&nbspAmount of Cabinets x <input class="js-shaker" placeholder="0" style="width: 60px;">
+        = $<span class="js-shaker-price">0</span> </p>
+
+       <p class="no-margin"> <b>Best Quality:</b>
+       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAmount of Cabinets x <input class="js-best" placeholder="0" style="width: 60px;">
+        = $<span class="js-best-price">0</span> </p>
+      <p class="no-marginn"> 
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDiscount*
+       Amount of Cabinets x <input class="js-discount" placeholder="0" style="width: 60px;">
+        = $<span class="js-discount-price">0</span> </p>
+      
     ${crownMoldingHTML}
 
-    </p>
+    
     <h2>Extra Charges</h2>
     <p><b>Long distance:</b> ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "$0"}</p>
     <p><b>Downtown:</b> ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "$0"}</p>
@@ -220,10 +270,31 @@
     `
 
  
- document.querySelector('.js-standard').addEventListener('keydown', ()=>{
-  let input = document.querySelector('.js-standard')
+ document.querySelector('.js-flat').addEventListener('keydown', ()=>{
+  let input = document.querySelector('.js-flat')
   setTimeout(()=>{
-    document.querySelector('.js-price').innerHTML = totalCabinetAmount*input.value
+    document.querySelector('.js-flat-price').innerHTML = totalCabinetAmount*input.value
+  },1)
+  })
+   
+ document.querySelector('.js-shaker').addEventListener('keydown', ()=>{
+  let input = document.querySelector('.js-shaker')
+  setTimeout(()=>{
+    document.querySelector('.js-shaker-price').innerHTML = totalCabinetAmount*input.value
+  },1)
+  })
+   
+ document.querySelector('.js-best').addEventListener('keydown', ()=>{
+  let input = document.querySelector('.js-best')
+  setTimeout(()=>{
+    document.querySelector('.js-best-price').innerHTML = totalCabinetAmount*input.value
+  },1)
+  })
+
+   document.querySelector('.js-discount').addEventListener('keydown', ()=>{
+  let input = document.querySelector('.js-discount')
+  setTimeout(()=>{
+    document.querySelector('.js-discount-price').innerHTML = totalCabinetAmount*input.value
   },1)
   })
   </script>

@@ -72,6 +72,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
     wallIn: 0,
   })
 }
+  calculate.upperCabinetsHeightIn = eval(document.querySelector('.js-upper-cabinets-height-in').value)
   calculate.cornerAmount = eval(document.querySelector('.js-corner-amount').value)
   calculate.islandAmount = eval(document.querySelector('.js-island-amount').value)
   calculate.islandIn = []
