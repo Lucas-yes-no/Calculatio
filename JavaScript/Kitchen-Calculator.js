@@ -88,6 +88,13 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
     if (aindex == index){
       array.islandWidthIn = eval(input.value)
     }})})
+  document.querySelectorAll('.js-one-two-sides').forEach((select, index)=>{
+    calculate.islandIn.forEach((array, aindex)=>{
+      if (aindex == index){
+        array.sides = eval(select.value)
+      }
+    })
+  })
   document.querySelectorAll('.js-waterfall-maybe').forEach((select, index)=>{
     calculate.islandIn.forEach((array, aindex)=>{
       if (aindex == index){
@@ -131,7 +138,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
   if (document.querySelector('.js-pantry-height-in')){
     calculate.pantryHeightIn = eval(document.querySelector('.js-pantry-height-in').value)
   }else{
-    calculate.pantryHeightIn
+    calculate.pantryHeightIn = 0
   }
   if (document.querySelector('.js-window-1-width-in').value){
   calculate.window1WidthIn = eval(document.querySelector('.js-window-1-width-in').value)
@@ -265,6 +272,10 @@ document.querySelector('.js-amount-of-islands').addEventListener('change', (sele
      <p class="js-bold">Island ${i+1}</p>
     <p>Lenghth (in): <input class="js-island-length" id="${i+1}"></p>
     <p>Width (in): <input class="js-island-width" id="${i+1}"></p>
+    <p>One/Two Sides <select class="js-one-two-sides">
+     <option value="1">1</option>
+     <option value="2">2</option>
+    </select> </p>
     <p>Waterfall: <select type="radio" class="js-waterfall-select js-waterfall-maybe" id="${i+1}">
       <option value="No">No</option>
       <option value="Yes">Yes</option>
