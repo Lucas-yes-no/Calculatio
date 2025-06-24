@@ -14,16 +14,18 @@
 
   <script>
     let calculatio = JSON.parse(localStorage.getItem('calculatee'))
-    console.log(calculatio.cookOption)
+
     let countertop = 0
-    
+
     calculatio.wallIn.forEach((array)=>{
       countertop+=array.wallIn
     })
-  
-    countertop = countertop - calculatio.fridgeIn - calculatio.pantryIn
+
+    countertop = countertop - calculatio.fridgeIn - calculatio.pantryWidthIn
+
     if (calculatio.cookOption === 'Range'){
       countertop -= calculatio.cookIn
+      
     }
 
     countertop = (countertop*28)/144
@@ -57,7 +59,7 @@
       backsplash += the.wallIn
     })
 
-    backsplash = ((backsplash - calculatio.fridgeIn - calculatio.pantryIn)*20)/144
+    backsplash = ((backsplash - calculatio.fridgeIn - calculatio.pantryWidthIn)*20)/144
     if (Number.isNaN(backsplash)){
       backsplash = 0
     }
@@ -93,10 +95,10 @@
       upperCabinets += thing.wallIn
       lowerCabinets += thing.wallIn
     })
-    console.log(lowerCabinets)
+
     upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn
     lowerCabinets = lowerCabinets - calculatio.fridgeIn - calculatio.pantryWidthIn
-    console.log(lowerCabinets)
+
     if (calculatio.hoodOption === "Chimney"){
       upperCabinets -= 36
     }
@@ -128,19 +130,31 @@
   
   let pantryAmount = 0
   if (calculatio.pantryHeightIn == 90){
-    pantryAmount = calculatio.pantryWidthIn/24*2
+    pantryAmount = calculatio.pantryWidthIn/12/24*2
   } else if (calculatio.pantryHeightIn == 96){
-    pantryAmount = calculatio.pantryWidthIn/21*2
+    pantryAmount = calculatio.pantryWidthIn/12/21*2
   } else if (calculatio.pantryHeightIn == 84){
-    pantryAmount = calculatio.pantryWidthIn/27*2
+    pantryAmount = calculatio.pantryWidthIn/12/27*2
   }
   let totalCabinetAmount = pantryAmount + upperCabinetsAmount + lowerCabinetsAmount
   
 
-  let crownMoldingHtml = ''
+  let crownMoldingHTML = ''
+  let crownMoldingFt = 0
   let crownMoldingPrice = 0
+  let crownMoldingAmount = 0
   if (calculatio.moldingOption == 'Yes'){
-    crownMoldingPrice = 0
+    console.log('Yes')
+    crownMoldingFt = (upperCabinets+(calculatio.pantryHeightIn*calculatio.pantryWidthIn))*1.4
+    crownMoldingAmount = crownMoldingFt/10
+    crownMoldingPrice = crownMoldingAmount*250
+    crownMoldingHTML = `
+    <p><b>Crown Molding:</b><br><br>
+    &nbsp&nbsp&nbsp${crownMoldingFt} Feet<br>
+    &nbsp&nbsp&nbsp${crownMoldingAmount} Pieces<br>
+    &nbsp&nbsp&nbsp$${crownMoldingPrice}
+      </p>
+    `
   }
 
     let standardPrice = -1
@@ -162,7 +176,7 @@
     <p><b>Hood Area:</b></p>
     <p>&nbsp&nbsp&nbsp Hood Option: ${calculatio.hoodOption} <br>
     &nbsp&nbsp&nbsp Hood: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : 0} </p>
-    <p><b>Backsplash Total:</b> ${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
+    <p><b>Backsplash Total:</b> &nbsp&nbsp&nbsp${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
 
     <h2>3. Cabinets</h2>
     <p><b>Upper Cabinets:</b><br><br>
@@ -177,9 +191,9 @@
     <p><b>Pantry:</b> 
     &nbsp&nbsp&nbsp${pantryAmount} Cabinets
     </p>
-    <p><b>Total Cabinets:</b> ${totalCabinetAmount}</p>
+    <p><b>Total Cabinets:</b> &nbsp&nbsp&nbsp${totalCabinetAmount}</p>
 
-   ${crownMoldingHtml}
+   
 
     
     <p>
@@ -190,7 +204,9 @@
         <option value="">Best Quality</option>
         </select></b>
        Amount of Cabinets x <input class="js-standard" placeholder="0" style="width: 60px;">
-        = $<span class="js-price"></span> <br>
+        = $<span class="js-price">0</span> <br>
+
+    ${crownMoldingHTML}
 
     </p>
     <h2>Extra Charges</h2>
