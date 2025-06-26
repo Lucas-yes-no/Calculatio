@@ -1,0 +1,80 @@
+    .logo-img{
+      height: 50px;
+    }
+    .js-very-bold{
+
+      font-weight: bold;
+    }
+    .js-bold{
+      color: red;
+      font-weight: bold;
+    }
+    .js-secondary{
+      margin-left: 20px;
+    }
+    .js-third{
+      margin-left: 40px;
+    }
+    .one-lane-4{
+      display: grid;
+      grid-template-columns: 100px 100px 100px 100px;
+      align-items: center;
+    }
+    .right{
+      position: relative ;
+      left: 50px
+    }
+
+    .gray{
+      color: gray;
+    }
+    .container-all{
+      display: flex;
+      
+      justify-content: center;  
+    }
+    .secondary-all{
+      display: flex;
+      width: 600px;
+      border: solid;
+      border-width: 1px;
+      justify-content: center;
+    }
+    .calculator-title{
+     font-size: 27px;
+      text-align: center;
+
+    }
+    .third-all{
+      width: 500px;
+    }
+    .top-three{
+        float: right;
+        z-index: 1;
+    }
+    .sinput{
+        width: 100px;
+    }
+    .esinput{
+        width: 60px;
+    }
+    .bline{
+        border: none;
+        border-bottom: solid;
+        border-width: 1px;
+    }
+    .left-side{
+        float: left;
+    }
+    .js-enter-button{
+        position: absolute;
+        right: 150px;
+        bottom: 100px;
+        border: none;
+        font-size: 25px;
+        background-color: rgb(22, 215, 22);
+        cursor: pointer;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }

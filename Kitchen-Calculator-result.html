@@ -130,11 +130,11 @@
         lowerCabinets += array.islandLengthIn*2
       }
     })
-    console.log(lowerCabinets)
+    
 
     upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn - calculatio.pantryWidthIn
     lowerCabinets = lowerCabinets - calculatio.fridgeIn - calculatio.pantryWidthIn
-    console.log(lowerCabinets)
+    
     if (calculatio.hoodOption === "Chimney"){
       upperCabinets -= 36
     }
@@ -147,10 +147,8 @@
     if (calculatio.underCounterWineFridgeOption === 'Yes'){
       lowerCabinets -= calculatio.underCounterWineFridgeIn
     }
-    console.log(lowerCabinets)
     upperCabinets = upperCabinets - (calculatio.cornerAmount*12)
     lowerCabinets = lowerCabinets - (calculatio.cornerAmount*24)
-    console.log(lowerCabinets)
     upperCabinets = upperCabinets/12
 
     lowerCabinets = lowerCabinets/12
@@ -190,7 +188,6 @@
   let crownMoldingPrice = 0
   let crownMoldingAmount = 0
   if (calculatio.moldingOption == 'Yes'){
-    console.log('Yes')
     crownMoldingFt = Math.ceil(((upperCabinets+(calculatio.pantryWidthIn))*1.4)*2)/2
     crownMoldingAmount = Math.ceil((crownMoldingFt/10)*2)/2
     crownMoldingPrice = crownMoldingAmount*250

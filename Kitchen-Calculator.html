@@ -2,47 +2,14 @@
 <html lang="en">
 <head>
   <link rel="icon" href="Images/logggo.ico">
-  <style>
-    body{
-      zoom: 165%;
-    }
-    .logo-img{
-      height: 50px;
-    }
-    .js-very-bold{
+  
+    
 
-      font-weight: bold;
-    }
-    .js-bold{
-      color: red;
-      font-weight: bold;
-    }
-    .js-secondary{
-      margin-left: 20px;
-    }
-    .js-third{
-      margin-left: 40px;
-    }
-    .one-lane-4{
-      display: grid;
-      grid-template-columns: 100px 100px 100px 100px;
-      align-items: center;
-    }
-    .right{
-      position: relative ;
-      left: 50px
-    }
-    .right-alot{
-      position: relative;
-      left: 200px;
-    }
-    .gray{
-      color: gray;
-    }
-  </style>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kitchen Calculator</title>
+  <link rel="stylesheet" href="CSS/kitchen-calculater.css">
 </head>
 <body>
   <script>
@@ -52,47 +19,91 @@
 
 
   <p class="js-kitchen-calculator"></p>
-
-
-
-
-
-
-  <img class="logo-img" src="Images/loggo.png">
-
-  <div class="right-alot">
+  <div class="container-all">
+    <div class="secondary-all">
+      <div class="third-all">
+        <br>
+      <div class="calculator-title">
+        
   <p class="js-very-bold">Kitchen Calculator</p>
-  <br>
+  </div>
   
+
   
-    <p>Client Name: <input class="js-client-name"></p>
+    <div class="top-three">
+    <p>Client Name: <input class="bline js-client-name sinput"></p>
 
-    <p>City: <input class="js-client-city"></p>
+    <p>City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&hairsp; <input class="bline js-client-city sinput"></p>
 
-    <p>More info: <input class="js-client-more-info"></p>
+    <p>More info:&nbsp;&nbsp;&nbsp;&nbsp; <input class="bline js-client-more-info sinput"></p>
 
+
+    <br>
     <p><input type="checkbox" value="Yes" class="js-contractor-maybe">*Contractor</p>
+      
+
+        <p><input type="checkbox" class="js-dishwasher-maybe">Dishwasher (24 inch)</p>
+  <p><input type="checkbox" value="Yes" class="js-crown-molding-maybe">Crown Molding</p>
+  <p class=""><input type = "checkbox" class="js-under-counter-wine-fridge-maybe">Under counter wine fridge</p>
+  <div class="js-under-counter-wine-fridge-container"></div>
+  <p><input type="checkbox" class="js-long-distance-maybe">Long distance
+    <div class="js-hour-drive-container"></div></p>
+  <p><input type="checkbox" class="js-downtown-maybe">Downtown</p>
+  <p><input type="checkbox" class="js-condo-maybe">Condo</p>
 
 
-    <br>
-    <br>
-    <br>
-
-  <p>Ceiling (in): <input class="js-ceiling-in"></p>
-    <p class="right"><input type="checkbox" class="js-ceiling-double-layer-maybe">*Double Layer</p>
-  <br>
-  <p>Number of walls:
-  <select type="radio" class="js-wall js-wall-amount">
-    <option disabled selected value="0">Select Your Option</option>
+      <p>Islands: <select type="radio" class="js-amount-of-islands js-island-amount">
+    <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
+  </select></p>
+  <div class="js-islands-container"></div>
+      </div>
+
+  
+
+      <div class="left-side">
+
+  <p>Upper Cabinets Height: <input class="esinput js-upper-cabinets-height-in"></p>
+  <p>Fridge: Width (in): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&thinsp;&thinsp;&hairsp;<input class="esinput js-fridge-in"></p>
+      
+  <p><b>Pantry (incl. M&O) (in): </b><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Width: &hairsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&hairsp;
+    <input class="esinput js-pantry-width-in" style="margin-bottom: 7px;"><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Height: &hairsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="esinput js-pantry-height-in">
+  </p>
+
+
+
+  <p>Ceiling (in): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&thinsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input class="js-ceiling-in esinput"></p>
+    <p class="right"><input type="checkbox" class="js-ceiling-double-layer-maybe">*Double Layer</p>
+  
+   <p>Window 1 Width (in): &thinsp;&thinsp;&thinsp;
+    <input class="esinput js-window-1-width-in"></p>
+  <p class="right"><input type="checkbox" class="js-window-2-maybe">Window 2</p>
+  <div class="js-window-2-container"></div>
+
+    <p>Cook: <select class="js-cook-option" type="radio">
+    <option disabled selected>Select One</option>
+    <option value="Cooktop">Cooktop</option>
+    <option value="Range">Range</option>
+  </select><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&numsp;&thinsp;
+  (in): <input class="esinput js-cook-in"></p>
+
+  <p>Hood: <select class="js-hood-option" type="radio">
+    <option disabled selected>Select One</option>
+    <option value="Chimney">Chimney</option>
+    <option value="Under Cabinet Hood">Under Cabinet Hood</option>
+    <option value="Microwave Hood">Microwave Hood</option>
+    <option value="Hood Box">Hood Box</option>
   </select></p>
 
-  <div class="js-wall-length-container"></div>
-  <p>Upper Cabinets Height: <input class="js-upper-cabinets-height-in"></p>
-  <p>Number of corners: <select class="js-corner-amount" type="radio">
+
+
+
+  <p>Corners: <select class="js-corner-amount" type="radio">
     <option value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -103,55 +114,37 @@
   </select></p>
 
 
-  <p>Number of Islands: <select type="radio" class="js-amount-of-islands js-island-amount">
-    <option value="0">0</option>
+    <p>Walls:
+  <select type="radio" class="js-wall js-wall-amount">
+    <option disabled selected value="0">0</option>
     <option value="1">1</option>
     <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
   </select></p>
-  <div class="js-islands-container right"></div>
 
-  <p>Cook: <select class="js-cook-option" type="radio">
-    <option disabled selected>Select Your Option</option>
-    <option value="Cooktop">Cooktop</option>
-    <option value="Range">Range</option>
-  </select> (in): <input class="js-cook-in"></p>
-  <p>Hood: <select class="js-hood-option" type="radio">
-    <option disabled selected>Select Your Option</option>
-    <option value="Chimney">Chimney</option>
-    <option value="Under Cabinet Hood">Under Cabinet Hood</option>
-    <option value="Microwave Hood">Microwave Hood</option>
-    <option value="Hood Box">Hood Box</option>
-  </select></p>
-  <p>Fridge: Width (in): <input class="js-fridge-in"></p>
-  <p>Pantry (including built-in M&O) (in): <br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Width: <input class="js-pantry-width-in" style="margin-bottom: 7px;"><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Height: <input class="js-pantry-height-in">
-  </p>
-  <p>Window 1 Width (in): <input class="js-window-1-width-in"></p>
-  <p class="right"><input type="checkbox" class="js-window-2-maybe">Window 2</p>
-  <div class="js-window-2-container"></div>
-
-  <p><input type="checkbox" class="js-dishwasher-maybe">Dishwasher (24 inch)</p>
-  <p><input type="checkbox" value="Yes" class="js-crown-molding-maybe">Crown Molding</p>
+  <div class="js-wall-length-container"></div>
 
 
-  <p class=""><input type = "checkbox" class="js-under-counter-wine-fridge-maybe">Under counter wine fridge</p>
-  <div class="js-under-counter-wine-fridge-container"></div>
-  <p><input type="checkbox" class="js-long-distance-maybe">Long distance
-    <div class="js-hour-drive-container"></div></p>
-  <p><input type="checkbox" class="js-downtown-maybe">Downtown</p>
-  <p><input type="checkbox" class="js-condo-maybe">Condo</p>
 
 
-  <button class="js-enter-button">Enter</button>
+</div>
+
+
+ 
+
+
+
+
+  <button class="js-enter-button">Next</button>
 
 
 
 
   
 
-
-
+</div>
+    </div>
 </div>
 
 

@@ -216,7 +216,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
 
   document.querySelector('.js-window-2-maybe').addEventListener('click', ()=>{
     let window2HTML = `
-    <p class="right">Window 2 Width (in): <input class="js-window-2-width-in"></p>
+    <p>Window 2 Width (in): &thinsp;&thinsp;&thinsp;&nbsp;<input class="esinput js-window-2-width-in"></p>
     `
     if (document.querySelector('.js-window-2-maybe').checked){
       document.querySelector('.js-window-2-container').innerHTML = window2HTML
@@ -270,17 +270,17 @@ document.querySelector('.js-amount-of-islands').addEventListener('change', (sele
     
     islandHTML+=`
      <p class="js-bold">Island ${i+1}</p>
-    <p>Lenghth (in): <input class="js-island-length" id="${i+1}"></p>
-    <p>Width (in): <input class="js-island-width" id="${i+1}"></p>
-    <p>One/Two Sides <select class="js-one-two-sides">
+    <p>Lenghth (in): &thinsp;&emsp;&emsp;&thinsp;<input class="esinput js-island-length" id="${i+1}"></p>
+    <p>Width (in): &thinsp;&emsp;&emsp;&emsp;<input class="esinput js-island-width" id="${i+1}"></p>
+    <p>One/Two Sides &emsp;&thinsp;&thinsp;&thinsp;<select class="esinput js-one-two-sides">
      <option value="1">1</option>
      <option value="2">2</option>
     </select> </p>
-    <p>Waterfall: <select type="radio" class="js-waterfall-select js-waterfall-maybe" id="${i+1}">
+    <p>Waterfall: &emsp;&emsp;&emsp;&numsp;&thinsp;&hairsp;<select type="radio" class="esinput js-waterfall-select js-waterfall-maybe" id="${i+1}">
       <option value="No">No</option>
       <option value="Yes">Yes</option>
       </select></p>
-      <div class="right waterfall-container" id="waterfall-${i+1}"></div>
+      <div class="waterfall-container" id="waterfall-${i+1}"></div>
     
     `
   }
@@ -293,25 +293,25 @@ document.querySelector('.js-wall').addEventListener('change', (select)=>{
   numberOfWalls = document.querySelector('.js-wall').value
   if (numberOfWalls ==  1){
     wallHTML = `
-    <p class="right">Wall 1 (in): <input class="js-wall-in"></p>
+    <p class="right">Wall 1 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
     `
   } else if (numberOfWalls == 2){
     wallHTML=`
-    <p class="right">Wall 1 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 2 (in): <input class="js-wall-in"></p>
+    <p class="right">Wall 1 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 2 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
     `
   } else if (numberOfWalls == 3){
     wallHTML=`
-    <p class="right">Wall 1 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 2 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 3 (in): <input class="js-wall-in"></p>
+    <p class="right">Wall 1 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 2 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 3 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
     `
   } else if (numberOfWalls == 4){
     wallHTML=`
-    <p class="right">Wall 1 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 2 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 3 (in): <input class="js-wall-in"></p>
-    <p class="right">Wall 4 (in): <input class="js-wall-in"></p>
+    <p class="right">Wall 1 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 2 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 3 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
+    <p class="right">Wall 4 (in): &emsp;&emsp;<input class="esinput js-wall-in"></p>
     `
   }
   document.querySelector('.js-wall-length-container').innerHTML = wallHTML
@@ -321,14 +321,17 @@ document.querySelector('.js-wall').addEventListener('change', (select)=>{
 function waterSelect(){
   document.querySelectorAll(`.js-waterfall-select`).forEach((select)=>{
     select.addEventListener('change', ()=>{
-      if (select.value == "Yes")
-      document.getElementById(`waterfall-${select.id}`).innerHTML+=`
-      <p># of Waterfall <select class="js-waterfall-amount" id="${select.id}" type="radio">
+      if (select.value == "Yes"){
+      document.getElementById(`waterfall-${select.id}`).innerHTML=`
+      <p>&emsp;# of Waterfall &emsp;&thinsp;<select class="esinput js-waterfall-amount" id="${select.id}" type="radio">
         <option value="1">1</option>
         <option value="2">2</option>
         </select></p>
-      <p>Sitting Area (in): <input class="js-sitting-area-in" id="${select.id}"></p>
+      <p>&emsp;Sitting Area (in): <input class="esinput js-sitting-area-in" id="${select.id}"></p>
       `
+      } else if (select.value == "No"){
+        document.getElementById(`waterfall-${select.id}`).innerHTML=''
+      }
     })
   })
 }
