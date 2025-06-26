@@ -15,10 +15,27 @@
       margin: 0;
       margin-top: 2px;
     }
+    .red{
+      color:red;
+    }
+    .client-name{
+
+      font-size: 30px;
+
+    }
+    .l8{
+      font-size: 18px;
+    }
+    .title{
+      width: 500px;
+
+      text-align: center;
+    }
+    
   </style>
 </head>
 <body>
-  <h1>Kitchen Calculator</h1>
+
   <div class="js-result-container"></div>
 
   
@@ -86,7 +103,7 @@
     } else if (calculatio.hoodOption == 'Microwave Hood'){
       hoodIn = 0;
     }
-    let longDistance;
+    let longDistance = 0
     let downtownOption = 0
     let condoOption = 0
     if (calculatio.longDistanceOption == 'Yes'){
@@ -115,7 +132,7 @@
     })
     console.log(lowerCabinets)
 
-    upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn
+    upperCabinets = upperCabinets - calculatio.window1WidthIn - calculatio.window2WidthIn - calculatio.pantryWidthIn
     lowerCabinets = lowerCabinets - calculatio.fridgeIn - calculatio.pantryWidthIn
     console.log(lowerCabinets)
     if (calculatio.hoodOption === "Chimney"){
@@ -174,8 +191,8 @@
   let crownMoldingAmount = 0
   if (calculatio.moldingOption == 'Yes'){
     console.log('Yes')
-    crownMoldingFt = (upperCabinets+(calculatio.pantryWidthIn))*1.4
-    crownMoldingAmount = crownMoldingFt/10
+    crownMoldingFt = Math.ceil(((upperCabinets+(calculatio.pantryWidthIn))*1.4)*2)/2
+    crownMoldingAmount = Math.ceil((crownMoldingFt/10)*2)/2
     crownMoldingPrice = crownMoldingAmount*250
     crownMoldingHTML = `
     <p><b>Crown Molding:</b><br><br>
@@ -188,7 +205,7 @@
   
     let moreInfoHTML = ''
     if (calculatio.clientMoreInfo !== ''){
-      moreInfoHTML = `<p><b>More Info:</b> ${calculatio.clientMoreInfo}</p>`
+      moreInfoHTML = `<span class="l8" style="margin-left: 50px;"><b>More Info:</b> ${calculatio.clientMoreInfo}</span>`
     }
     
 
@@ -211,24 +228,42 @@
     
 
     document.querySelector('.js-result-container').innerHTML = `
-    <p><b>Client Name:</b> ${calculatio.clientName}</p>
-    <p><b>City:</b> ${calculatio.clientCity}</p>
-    ${moreInfoHTML}
-    
-    <h2>1.Countertop:</h2>
+    <div class="title"><span class="client-name"><b>Client Name:</b> ${calculatio.clientName}</span></div><br>
+    <div class="title"> <span class="l8"><b>City:</b> ${calculatio.clientCity}</span> ${moreInfoHTML}</div>
+
+
+
+
+
+    <span style="position: absolute; left: 40px; top: 100px;">
+    <h2>1. Countertop:</h2>
     <p><b>Countertop:</b> ${countertop > 0? `${Math.ceil(countertop)} Square Feet`: 0}</p>
     ${islandHTMLL}
     ${waterfallHTML}
-    <p><b>Countertop Total:</b> ${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)} Square Feet</p>
-      
+    <p><b>Countertop Total:</b> <span class="red">${Math.ceil(countertop)+Math.ceil(island)+Math.ceil(waterfall)}</span> Square Feet</p>
+    </span>
+
+
+
+
+
+
+    <span style="position: absolute; left: 40px; top: 340px;">
     <h2>2. Backsplash</h2>
     
     <p><b>Backsplash:</b> ${backsplash > 0? `${Math.ceil(backsplash)}` : 0} Square Feet</p>
     
     <p> &nbsp&nbsp&nbspHood Option: ${calculatio.hoodOption} <br>
      &nbsp&nbsp&nbspHood Area: ${hoodIn >= 0? `${Math.ceil(hoodIn)} Square Feet` : 0} </p>
-    <p><b>Backsplash Total:</b> &nbsp&nbsp&nbsp${Math.ceil(backsplash)+Math.ceil(hoodIn)} Square Feet</p>
+    <p><b>Backsplash Total:</b> &nbsp&nbsp&nbsp<span class="red">${Math.ceil(backsplash)+Math.ceil(hoodIn)}</span> Square Feet</p>
+      </span>
 
+
+
+
+
+
+      <span style="position: absolute; left: 340px;  top: 100px;">
     <h2>3. Cabinets</h2>
     <p><b>Upper Cabinets:</b><br><br>
     &nbsp&nbsp&nbsp${Math.ceil(upperCabinets*2)/2} Feet <br>
@@ -242,37 +277,36 @@
     <p><b>Pantry:</b> 
     &nbsp&nbsp&nbsp${pantryAmount} Cabinets
     </p>
-    <p><b>Total Cabinets:</b> &nbsp&nbsp&nbsp${totalCabinetAmount}</p>
-
-   
-
+    <p><b>Total Cabinets:</b> &nbsp&nbsp&nbsp<span class="red">${totalCabinetAmount}</span></p>
     
-    
-      <p class="no-margin"><b>Flat Door Standard:</b>
+      <p class="no-margin"><b>Flat Door Standard:</b><br>
        &nbsp&nbspAmount of Cabinets x <input class="js-flat" placeholder="0" style="width: 60px;">
         = $<span class="js-flat-price">0</span> </p>
 
-       <p class="no-margin">  <b>Shaker Standard:</b>
-       &nbsp&nbsp&nbsp&nbsp&nbsp&nbspAmount of Cabinets x <input class="js-shaker" placeholder="0" style="width: 60px;">
+       <p class="no-margin">  <b>Shaker Standard:</b><br>
+       &nbsp&nbsp Amount of Cabinets x <input class="js-shaker" placeholder="0" style="width: 60px;">
         = $<span class="js-shaker-price">0</span> </p>
 
-       <p class="no-margin"> <b>Best Quality:</b>
-       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAmount of Cabinets x <input class="js-best" placeholder="0" style="width: 60px;">
+       <p class="no-margin"> <b>Best Quality:</b><br>
+       &nbsp&nbspAmount of Cabinets x <input class="js-best" placeholder="0" style="width: 60px;">
         = $<span class="js-best-price">0</span> </p>
       <p class="no-marginn"> 
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDiscount*
+        &nbsp&nbsp&nbsp&nbspDiscount*
        Amount of Cabinets x <input class="js-discount" placeholder="0" style="width: 60px;">
         = $<span class="js-discount-price">0</span> </p>
       
     ${crownMoldingHTML}
-
+        </span>
     
-    <h2>Extra Charges</h2>
+
+
+        <span style="position: absolute; left: 40px;  top: 600px;">
+    <h2>4.Extra Charges</h2>
     <p><b>Long distance:</b> ${longDistance >= 0? `$${Math.ceil(longDistance)}` : "$0"}</p>
     <p><b>Downtown:</b> ${downtownOption >= 0? `$${Math.ceil(downtownOption)} ` : "$0"}</p>
     <p><b>Condo:</b> ${condoOption >= 0? `$${Math.ceil(condoOption)} `: "$0"}</p>
-    <p><b>Extra Charges Total:</b>$${(longDistance + downtownOption + condoOption) >= 0? `${longDistance + downtownOption + condoOption}`: 0}</p>
-
+    <p><b>Extra Charges Total: </b> $<span class="red">${(longDistance + downtownOption + condoOption) >= 0? `${longDistance + downtownOption + condoOption}`: 0}</span></p>
+          </span>
 
 
     `
