@@ -36,8 +36,12 @@ let islandHTML;
 
 
 if (document.querySelector('.js-kitchen-calculator')){
+  if (sessionStorage.getItem("HTML")){
+    document.body.innerHTML = JSON.parse(sessionStorage.getItem("HTML"))
+  }
   calculate = {}
 document.querySelector('.js-enter-button').addEventListener('click', ()=>{
+  sessionStorage.setItem("HTML", JSON.stringify(document.body.innerHTML))
   calculate.clientName = document.querySelector('.js-client-name').value
   calculate.clientCity = document.querySelector('.js-client-city').value
   calculate.clientMoreInfo = document.querySelector('.js-client-more-info').value
@@ -191,10 +195,14 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
  },1 )
 
   })
+  
 
 
 
-
+document.querySelector('.js-clear').addEventListener('click', ()=>{
+  sessionStorage.clear();
+  location.reload();
+})
 
 
 
@@ -231,7 +239,7 @@ document.querySelector('.js-enter-button').addEventListener('click', ()=>{
     if (document.querySelector('.js-under-counter-wine-fridge-maybe').checked){
 
       document.querySelector('.js-under-counter-wine-fridge-container').innerHTML = `
-      <p class="right">Under Counter Wine Fridge Width (in): <input class="js-wine-fridge-width-in"></p>
+      <p class="right">Width (in): <input class="esinput js-wine-fridge-width-in"></p>
       `
     } else {
       document.querySelector('.js-under-counter-wine-fridge-container').innerHTML = ''

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Images/logggo.ico">
+  <title>Youtube Embeder</title>
+</head>
+<body>
+  <div class="js-video-container video-container">
+
+  </div>
+  <input onkeydown="
+  if (event.key === 'Enter'){
+  showVideo()
+  }
+  " class="js-url-input" placeholder="Insert link">
+  <button onclick="showVideo()">Insert</button>
+
+
+
+  <script>
+  function showVideo(){
+    const videoURL = document.querySelector('.js-url-input').value;
+    const videoID = extractVideoID(videoURL);
+
+    if (videoID  == null){
+      return;
+    } 
+    
+    document.querySelector('.js-video-container').innerHTML = `
+    <iframe src="https://www.youtube.com/embed/${videoID}"
+    width="604px" height="253px"></iframe>
+    `
+
+
+    function extractVideoID(url){
+      
+      try {
+        const parsedUrl = new URL(url);
+
+        if (parsedUrl.hostname == "youtu.be"){
+
+          return parsedUrl.pathname.slice(1);
+        } else if (parsedUrl === 'www.youtube.com' || 'youtube.com') {
+          return parsedUrl.searchParams.get('v')
+        } else {
+          return null;
+        }
+
+      }  catch(e){
+      return null;
+    }
+    return null;
+  }
+  console.log(videoID);
+}
+  </script>
+</body>
+</html>
