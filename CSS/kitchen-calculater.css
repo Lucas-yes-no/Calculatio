@@ -67,14 +67,32 @@
         float: left;
     }
     .js-enter-button{
-        position: absolute;
-        right: 150px;
-        bottom: 100px;
+
         border: none;
-        font-size: 25px;
+        width: 60px;
+        height: 30px;
         background-color: rgb(22, 215, 22);
         cursor: pointer;
         color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
+        float: right;
+        
+       
+       
+    }
+    .js-clear{
+
+      border: none;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+      width: 60px;
+      height: 30px;
+      
+      margin-bottom: 10px;
+
+    }
+    .buttons{
+      float: left;
+      
+      width: 500px;
     }
